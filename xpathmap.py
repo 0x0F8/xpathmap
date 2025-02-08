@@ -3,7 +3,9 @@ import requests, argparse, re, string, random, os, pathlib, json
 import urllib.parse
 from functools import partial
 
-parser = argparse.ArgumentParser(prog="xpathmap", description="XML XPath exploitation")
+parser = argparse.ArgumentParser(
+    prog="xpathmap", description="An XML XPath tool for blind injection"
+)
 parser.add_argument("-u", "--url", type=str, required=True, help="the target URL")
 parser.add_argument("-X", "--post", help="Send requests as POST", action="store_true")
 parser.add_argument(
@@ -133,8 +135,11 @@ def load_config():
 
 
 def save_dump(path, data):
-    if not os.path.exists(path):
-        os.makedirs(path)
+    path_list = path.split("/")
+    basepath = "/".join(path_list[:-1])
+
+    if not os.path.exists(basepath):
+        os.makedirs(basepath)
     with open(f"{path}", "w") as f:
         if not args.output_json:
             output = ""
@@ -268,6 +273,9 @@ def test_boolean(inject):
             if not "Content-Type" in headers:
                 headers["Content-Type"] = "application/x-www-form-urlencoded"
             data = urllib.parse.urlencode(data)
+
+        if not "User-Agent" in headers:
+            headers["User-Agent"] = None
 
         response = requests.post(
             args.url,
