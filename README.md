@@ -8,9 +8,9 @@ XML XPath exploitation
 options:  
   -h, --help            show this help message and exit  
   -u URL, --url URL     the target URL  
-  -X, --post            Send requests as POST  
+  -X, --post            send requests as POST  
   -x PROXY, --proxy PROXY  
-                        Proxy requests to this URL  
+                        proxy requests to this URL  
   -mr MATCH_REGEX, --match-regex MATCH_REGEX  
                         manually match this regex in the response body  
   -mh MATCH_HEADER, --match-header MATCH_HEADER  
