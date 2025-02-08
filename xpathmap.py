@@ -484,10 +484,7 @@ for key, value in table.items():
         child_schema = value[0]
         data = dump_xml_array(child_schema, path)
 
-    output_path = f"{dump_path}/{path}"
+    extension = ".json" if args.output_json else ".csv"
+    output_path = f"{dump_path}{path}{extension}"
     save_dump(output_path, data)
     print(f"Saved dump to {output_path}")
-
-# print(dump_xml_array({"username": "", "password": ""}, "/accounts/acc"))
-# print(parse_xml_structure())
-# print(parse_node_value("/accounts/acc[1]", "password"))
